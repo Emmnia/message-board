@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { PostCreate } from './posts/post-create/post-create';
 import { Header } from './header/header';
 import { PostList } from './posts/post-list/post-list';
+import { Post } from './posts/interfaces';
 
 
 @Component({
@@ -12,5 +13,10 @@ import { PostList } from './posts/post-list/post-list';
 
 })
 export class App {
+  posts: Post[] = [];
 
+  onPostAdded(post: Post) {
+    this.posts.push(post);
+    console.log(this.posts)
+  }
 }
