@@ -1,6 +1,7 @@
-import { Component, input } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { Post } from '../interfaces';
+import { PostService } from '../post.service';
 
 @Component({
   selector: 'app-post-list',
@@ -9,5 +10,6 @@ import { Post } from '../interfaces';
   styleUrl: './post-list.css'
 })
 export class PostList {
-  posts = input<Post[]>([]);
+  postService = inject(PostService);
+  posts = this.postService.posts;
 }

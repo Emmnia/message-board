@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { PostCreate } from './posts/post-create/post-create';
 import { Header } from './header/header';
 import { PostList } from './posts/post-list/post-list';
 import { Post } from './posts/interfaces';
+import { PostService } from './posts/post.service';
 
 
 @Component({
@@ -13,10 +14,9 @@ import { Post } from './posts/interfaces';
 
 })
 export class App {
-  posts: Post[] = [];
+  postService = inject(PostService);
 
   onPostAdded(post: Post) {
-    this.posts.push(post);
-    console.log(this.posts)
+    this.postService.addPost(post);
   }
 }

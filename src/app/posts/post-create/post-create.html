@@ -2,12 +2,18 @@
     <form [formGroup]="postForm">
         <mat-form-field>
             <input matInput type="text" formControlName="enteredTitle">
+            @if (titleErrors) {
+            <mat-error>{{titleErrors}}</mat-error>
+            }
         </mat-form-field>
         <mat-form-field>
             <textarea matInput rows="6" formControlName="enteredContent"></textarea>
+            @if (contentErrors) {
+            <mat-error>{{contentErrors}}</mat-error>
+            }
         </mat-form-field>
         <mat-card-actions>
-            <button matButton="filled" (click)="onAddPost()">Save Post</button>
+            <button matButton="filled" (click)="onAddPost()" [disabled]="postForm.invalid">Save Post</button>
         </mat-card-actions>
     </form>
 </mat-card>
