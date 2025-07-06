@@ -1,10 +1,10 @@
 <mat-card>
-    <form>
+    <form [formGroup]="postForm">
         <mat-form-field>
-            <input matInput type="text" [(ngModel)]="enteredTitle">
+            <input matInput type="text" formControlName="enteredTitle">
         </mat-form-field>
         <mat-form-field>
-            <textarea matInput rows="6" [(ngModel)]="enteredContent"></textarea>
+            <textarea matInput rows="6" formControlName="enteredContent"></textarea>
         </mat-form-field>
         <mat-card-actions>
             <button matButton="filled" (click)="onAddPost()">Save Post</button>

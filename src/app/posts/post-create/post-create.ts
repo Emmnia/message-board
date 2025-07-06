@@ -1,5 +1,5 @@
 import { Component, output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormField, MatInput } from '@angular/material/input';
@@ -7,24 +7,26 @@ import { Post } from '../interfaces';
 
 @Component({
   selector: 'app-post-create',
-  imports: [FormsModule, MatCardModule, MatInput, MatButton, MatFormField],
+  imports: [ReactiveFormsModule, MatCardModule, MatInput, MatButton, MatFormField],
   templateUrl: './post-create.html',
   styleUrl: './post-create.css'
 })
 export class PostCreate {
-  enteredTitle = '';
-  enteredContent = '';
+  postForm = new FormGroup({
+    enteredTitle: new FormControl(''),
+    enteredContent: new FormControl('')
+  });
   post = output<Post>();
 
   onAddPost() {
-    if (this.enteredTitle && this.enteredContent) {
-      this.post.emit({
-        title: this.enteredTitle,
-        content: this.enteredContent
-      });
+    const formValue = this.postForm.value;
 
-      this.enteredTitle = '';
-      this.enteredContent = '';
+    if (formValue.enteredTitle && formValue.enteredContent) {
+      this.post.emit({
+        title: formValue.enteredTitle,
+        content: formValue.enteredContent
+      });
+      this.postForm.reset();
     }
   }
 }
